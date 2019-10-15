@@ -1,0 +1,34 @@
+AGENT main
+VAR
+    bb : boolean;
+INVISIBLEVAR
+    agent1 : agentModule(bb);
+
+IVAR
+    iv1 : boolean;
+    iv2 : 3..10;
+    iv3 : {v1,v2,v3};
+
+
+INIT
+    iv3 = case
+        iv1 : {v1,v2};
+        !bb : v3;
+    esac;
+
+--TRANS TRUE;
+
+
+AGENT agentModule(VISIBLE outside)
+VAR
+    aa : boolean;
+
+ACTION : 3..10;
+
+PROTOCOL
+--    aa : 5;
+--    outside : 1;
+    TRUE : {4,8,9};
+END
+
+TRANS (ACT=3) -> !next(outside);
